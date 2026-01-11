@@ -137,6 +137,21 @@ export async function initDb(): Promise<void> {
         }
       }
     }
+
+    // Reset the sequence to avoid conflicts when inserting new patients
+    // This ensures the sequence is at least MAX(id) + 1
+    try {
+      const maxIdResult = await client.query(
+        'SELECT COALESCE(MAX(id), 0) as max_id FROM patients'
+      );
+      const maxId = parseInt(maxIdResult.rows[0].max_id, 10);
+      await client.query(
+        `SELECT setval('patients_id_seq', $1, true)`,
+        [Math.max(maxId, 1)]
+      );
+    } catch (error) {
+      // If sequence doesn't exist or other error, ignore (table might not have any data yet)
+    }
   } finally {
     if (client) {
       client.release();

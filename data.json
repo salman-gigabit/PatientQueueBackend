@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "name": "Rahim Ahmed",
+    "problem": "High fever",
+    "priority": "Emergency",
+    "arrivalTime": "2025-01-12T09:32:00Z",
+    "status": "Waiting"
+  },
+  {
+    "id": 2,
+    "name": "Nusrat Jahan",
+    "problem": "Headache",
+    "priority": "Normal",
+    "arrivalTime": "2025-01-12T09:35:00Z",
+    "status": "Waiting"
+  }
+]
